@@ -17,7 +17,7 @@ namespace BehaviorTree
         {
             if (root != null)
             {
-                root.Evaluate();
+                root.Update();
             }
         }
 

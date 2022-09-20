@@ -8,7 +8,7 @@ namespace BehaviorTree
     {
         protected Node node;
 
-        public DecoratorNode(Node node)
+        public DecoratorNode(Node node) : base()
         {
             node.SetParent(this);
             this.node = node;

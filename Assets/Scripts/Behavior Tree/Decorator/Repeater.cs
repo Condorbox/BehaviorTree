@@ -15,15 +15,18 @@ namespace BehaviorTree
             this.timesToRepeat = timesToRepeat;
         }
 
-        public override NodeState Evaluate()
+        protected override void OnStart() { }
+
+        protected override NodeState OnUpdate()
         {
             for (int i = 0; i < timesToRepeat; i++)
             {
-                node.Evaluate();
+                node.Update();
             }
 
-            _nodeState = NodeState.SUCCESS;
-            return _nodeState;
+            return NodeState.SUCCESS;
         }
+
+        protected override void OnStop() { }
     }
 }

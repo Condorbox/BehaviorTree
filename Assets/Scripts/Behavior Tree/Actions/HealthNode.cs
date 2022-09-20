@@ -14,9 +14,12 @@ public class HealthNode : Node
         this.threshold = threshold;
     }
 
-    public override NodeState Evaluate()
+    protected override void OnStart() { }
+
+    protected override NodeState OnUpdate()
     {
-        _nodeState = ai.GetCurrentHealth() <= threshold ? NodeState.SUCCESS : NodeState.FAILURE;
-        return _nodeState;
+        return ai.GetCurrentHealth() <= threshold ? NodeState.SUCCESS : NodeState.FAILURE;
     }
+
+    protected override void OnStop() { }
 }

@@ -16,10 +16,13 @@ public class RangeNode : Node
         this.origin = origin;
     }
 
-    public override NodeState Evaluate()
+    protected override void OnStart() { }
+
+    protected override NodeState OnUpdate()
     {
         float distance = Vector3.Distance(target.position, origin.position);
-        _nodeState = distance <= range ? NodeState.SUCCESS : NodeState.FAILURE;
-        return _nodeState;
+        return distance <= range ? NodeState.SUCCESS : NodeState.FAILURE;
     }
+
+    protected override void OnStop() { }
 }

@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Hammer
   m_EditorClassIdentifier: 
   projectilePrefab: {fileID: 4306536917040534494, guid: dcbf592334d194d498779d37d1065161, type: 3}
-  horizontalForce: 5
-  verticalForce: 4
+  horizontalForce: 300
+  verticalForce: 95

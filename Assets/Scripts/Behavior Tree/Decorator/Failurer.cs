@@ -2,22 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-//Evaluate the node and returns always Success except if it's Running that returns Running
-
 namespace BehaviorTree
 {
-    public class Succeeder : DecoratorNode
+    public class Failureer : DecoratorNode
     {
-        public Succeeder(Node node) : base(node) { }
+        public Failureer(Node node) : base(node) { }
 
         protected override void OnStart() { }
-
         protected override NodeState OnUpdate()
         {
             NodeState state = node.Update();
-            if (state == NodeState.FAILURE)
+            if (state == NodeState.SUCCESS)
             {
-                return NodeState.SUCCESS;
+                return NodeState.FAILURE;
             }
             return state;
         }
@@ -25,3 +22,4 @@ namespace BehaviorTree
         protected override void OnStop() { }
     }
 }
+

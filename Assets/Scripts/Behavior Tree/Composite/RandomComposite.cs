@@ -2,21 +2,28 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-//Select a random node and returns its nodeState
+//Select a random node and returns its nodeState, re-selects the node when Success or Failure
 
 namespace BehaviorTree
 {
     public class RandomComposite : CompositeNode
     {
-        public RandomComposite(List<Node> nodes) : base(nodes) { }
-
-        public override NodeState Evaluate()
+        private int randomNumber;
+        public RandomComposite(List<Node> nodes) : base(nodes)
         {
-            int randomNumber = Random.Range(0, nodes.Count);
-
-            _nodeState = nodes[randomNumber].Evaluate();
-
-            return _nodeState;
+            randomNumber = Random.Range(0, nodes.Count);
         }
+
+        protected override void OnStart()
+        {
+            randomNumber = Random.Range(0, nodes.Count);
+        }
+
+        protected override NodeState OnUpdate()
+        {
+            return nodes[randomNumber].Update();
+        }
+
+        protected override void OnStop() { }
     }
 }

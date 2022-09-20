@@ -19,7 +19,8 @@ public class SpawnFallingRocks : Node
         this.spawnInterval = spawnInterval;
     }
 
-    public override NodeState Evaluate()
+    protected override void OnStart() { }
+    protected override NodeState OnUpdate()
     {
         var sequence = DOTween.Sequence();
         for (int i = 0; i < spawnCount; i++)
@@ -41,4 +42,6 @@ public class SpawnFallingRocks : Node
             rockRigidbody.AddForce(Vector2.zero);
         }
     }
+
+    protected override void OnStop() { }
 }

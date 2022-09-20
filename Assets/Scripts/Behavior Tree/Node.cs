@@ -12,13 +12,38 @@ namespace BehaviorTree
         protected NodeState _nodeState;
         public NodeState nodeState { get { return _nodeState; } }
         private Dictionary<string, object> dataContext = new Dictionary<string, object>();
+        private bool started = false;
 
         public Node()
         {
             parent = null;
+            started = false;
         }
 
-        public abstract NodeState Evaluate();
+        public NodeState Update()
+        {
+            if (!started)
+            {
+                OnStart();
+                started = true;
+            }
+
+            _nodeState = OnUpdate();
+
+            if (_nodeState != NodeState.RUNNING)
+            {
+                OnStop();
+                started = false;
+            }
+
+            return _nodeState;
+        }
+
+        protected abstract void OnStart();
+        protected abstract NodeState OnUpdate();
+        protected abstract void OnStop();
+
+        public virtual void OnDrawGizmos() { }
 
         public void SetData(string key, object value)
         {

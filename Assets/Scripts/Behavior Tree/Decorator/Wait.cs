@@ -16,19 +16,22 @@ namespace BehaviorTree
             counter = this.timeToWait;
         }
 
-        public override NodeState Evaluate()
+        protected override void OnStart()
+        {
+            counter = timeToWait;
+        }
+
+
+        protected override NodeState OnUpdate()
         {
             counter -= Time.deltaTime;
-
             if (counter <= 0)
             {
-                counter = timeToWait;
-                _nodeState = node.Evaluate();
-                return _nodeState;
+                return node.Update();
             }
 
-            _nodeState = NodeState.RUNNING;
-            return _nodeState;
+            return NodeState.RUNNING;
         }
+        protected override void OnStop() { }
     }
 }

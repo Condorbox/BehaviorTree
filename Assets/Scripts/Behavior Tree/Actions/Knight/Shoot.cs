@@ -18,7 +18,9 @@ public class Shoot : Node
         this.weaponTransform = weaponTransform;
     }
 
-    public override NodeState Evaluate()
+    protected override void OnStart() { }
+
+    protected override NodeState OnUpdate()
     {
         foreach (Weapon weapon in weapons)
         {
@@ -36,7 +38,8 @@ public class Shoot : Node
             }
         }
 
-        _nodeState = NodeState.SUCCESS;
-        return _nodeState;
+        return NodeState.SUCCESS;
     }
+
+    protected override void OnStop() { }
 }

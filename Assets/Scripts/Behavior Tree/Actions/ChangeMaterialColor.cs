@@ -12,10 +12,13 @@ public class ChangeMaterialColor : Node
         this.material = material;
     }
 
-    public override NodeState Evaluate()
+    protected override void OnStart() { }
+
+    protected override NodeState OnUpdate()
     {
         material.color = Random.ColorHSV();
-        _nodeState = NodeState.SUCCESS;
-        return _nodeState;
+        return NodeState.SUCCESS;
     }
+
+    protected override void OnStop() { }
 }

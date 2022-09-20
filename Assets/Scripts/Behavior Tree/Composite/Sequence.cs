@@ -11,14 +11,16 @@ namespace BehaviorTree
     {
         public Sequence(List<Node> nodes) : base(nodes) { }
 
-        public override NodeState Evaluate()
+        protected override void OnStop() { }
+
+        protected override NodeState OnUpdate()
         {
             bool isAnyNodeRunning = false;
             foreach (Node node in nodes)
             {
-                switch (node.Evaluate())
+                switch (node.Update())
                 {
-                    case NodeState.RUNNING:
+                    case NodeState.RUNNING:         //TODO Maybe return NodeState.RUNNING
                         isAnyNodeRunning = true;
                         continue;
 
@@ -35,8 +37,9 @@ namespace BehaviorTree
                 }
             }
 
-            _nodeState = isAnyNodeRunning ? NodeState.RUNNING : NodeState.SUCCESS;
-            return _nodeState;
+            return isAnyNodeRunning ? NodeState.RUNNING : NodeState.SUCCESS;
         }
+
+        protected override void OnStart() { }
     }
 }

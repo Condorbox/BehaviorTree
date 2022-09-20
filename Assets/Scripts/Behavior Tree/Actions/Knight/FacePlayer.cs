@@ -17,12 +17,15 @@ public class FacePlayer : Node
         this.baseScaleX = transform.localScale.x;
     }
 
-    public override NodeState Evaluate()
+    protected override void OnStart() { }
+
+    protected override NodeState OnUpdate()
     {
         var scale = transform.localScale;
         scale.x = transform.position.x > playerTransform.position.x ? -baseScaleX : baseScaleX;
         transform.localScale = scale;
-        _nodeState = NodeState.SUCCESS;
-        return _nodeState;
+        return NodeState.SUCCESS;
     }
+
+    protected override void OnStop() { }
 }

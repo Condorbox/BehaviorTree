@@ -17,7 +17,9 @@ public class ChaseNode : Node
         this.ai = ai;
     }
 
-    public override NodeState Evaluate()
+    protected override void OnStart() { }
+
+    protected override NodeState OnUpdate()
     {
         ai.SetColor(Color.yellow);
         float distance = Vector3.Distance(target.position, agent.transform.position);
@@ -25,14 +27,14 @@ public class ChaseNode : Node
         {
             agent.isStopped = false;
             agent.SetDestination(target.position);
-            _nodeState = NodeState.RUNNING;
-            return _nodeState;
+            return NodeState.RUNNING;
         }
         else
         {
             agent.isStopped = true;
-            _nodeState = NodeState.SUCCESS;
-            return _nodeState;
+            return NodeState.SUCCESS;
         }
     }
+
+    protected override void OnStop() { }
 }

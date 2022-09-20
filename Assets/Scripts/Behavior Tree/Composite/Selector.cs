@@ -10,19 +10,19 @@ namespace BehaviorTree
     {
         public Selector(List<Node> nodes) : base(nodes) { }
 
-        public override NodeState Evaluate()
+        protected override void OnStart() { }
+
+        protected override NodeState OnUpdate()
         {
             foreach (Node node in nodes)
             {
-                switch (node.Evaluate())
+                switch (node.Update())
                 {
                     case NodeState.RUNNING:
-                        _nodeState = NodeState.RUNNING;
-                        return _nodeState;
+                        return NodeState.RUNNING;
 
                     case NodeState.SUCCESS:
-                        _nodeState = NodeState.SUCCESS;
-                        return _nodeState;
+                        return NodeState.SUCCESS;
 
                     case NodeState.FAILURE:
                         continue;
@@ -33,8 +33,8 @@ namespace BehaviorTree
                 }
             }
 
-            _nodeState = NodeState.FAILURE;
-            return _nodeState;
+            return NodeState.FAILURE;
         }
+        protected override void OnStop() { }
     }
 }

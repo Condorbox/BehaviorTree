@@ -10,29 +10,30 @@ namespace BehaviorTree
     {
         public Invertor(Node node) : base(node) { }
 
-        public override NodeState Evaluate()
+        protected override void OnStart() { }
+
+        protected override NodeState OnUpdate()
         {
-            switch (node.Evaluate())
+            switch (node.Update())
             {
                 case NodeState.RUNNING:
-                    _nodeState = NodeState.RUNNING;
-                    break;
+                    return NodeState.RUNNING;
 
                 case NodeState.SUCCESS:
-                    _nodeState = NodeState.FAILURE;
-                    break;
+                    return NodeState.FAILURE;
 
                 case NodeState.FAILURE:
-                    _nodeState = NodeState.SUCCESS;
-                    break;
+                    return NodeState.SUCCESS;
 
                 default:
                     UnityEngine.Debug.LogWarning($"<color=yellow>Error: state {node.nodeState} not defined</color>");
                     break;
             }
 
-            return _nodeState;
+            return NodeState.FAILURE;
         }
+
+        protected override void OnStop() { }
     }
 }
 

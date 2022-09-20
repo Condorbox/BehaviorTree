@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using BehaviorTree;
@@ -14,17 +15,21 @@ public class IsCoverNode : Node
         this.origin = origin;
     }
 
-    public override NodeState Evaluate()
+    protected override void OnStart() { }
+
+    protected override NodeState OnUpdate()
     {
         RaycastHit hit;
-        if(Physics.Raycast(origin.position, target.position - origin.position, out hit)) {
-            if(hit.collider.transform != target) {
-                _nodeState = NodeState.SUCCESS;
-                return _nodeState;
+        if (Physics.Raycast(origin.position, target.position - origin.position, out hit))
+        {
+            if (hit.collider.transform != target)
+            {
+                return NodeState.SUCCESS;
             }
         }
 
-        _nodeState = NodeState.FAILURE;
-        return _nodeState;
+        return NodeState.FAILURE;
     }
+
+    protected override void OnStop() { }
 }

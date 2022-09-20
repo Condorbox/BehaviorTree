@@ -13,7 +13,6 @@ public class Jump : Node
     private bool shakeCameraOnLanding;
     private Animator animator;
 
-    private bool jumped = false;
     private Transform playerTransform;
     private Transform transform;
     private Rigidbody2D rb;
@@ -31,32 +30,19 @@ public class Jump : Node
         this.jumpTime = jumpTime;
         this.shakeCameraOnLanding = shakeCameraOnLanding;
         this.animator = animator;
-        this.jumped = false;
         this.playerTransform = player;
         this.transform = transform;
         this.rb = rb;
     }
 
-    public override NodeState Evaluate()
+    protected override void OnStart()
     {
-        if (!jumped)
-        {
-            buildupTween = DOVirtual.DelayedCall(buildupTime, StartJump, false);
-            //animator.SetTrigger("Jump");
-            jumped = true;
-        }
+        buildupTween = DOVirtual.DelayedCall(buildupTime, StartJump, false);
+    }
 
-        _nodeState = hasLanded ? NodeState.SUCCESS : NodeState.RUNNING;
-
-        if (_nodeState == NodeState.SUCCESS)
-        {
-            jumped = false;
-            buildupTween?.Kill();
-            jumpTween?.Kill();
-            hasLanded = false;
-        }
-
-        return _nodeState;
+    protected override NodeState OnUpdate()
+    {
+        return hasLanded ? NodeState.SUCCESS : NodeState.RUNNING;
     }
 
     private void StartJump()
@@ -72,5 +58,12 @@ public class Jump : Node
                 //TODO Shake Camera
             }
         }, false);
+    }
+
+    protected override void OnStop()
+    {
+        buildupTween?.Kill();
+        jumpTween?.Kill();
+        hasLanded = false;
     }
 }

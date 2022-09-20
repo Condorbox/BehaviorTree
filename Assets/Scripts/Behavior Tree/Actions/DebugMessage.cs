@@ -11,10 +11,13 @@ public class DebugMessage : Node
         this.message = message;
     }
 
-    public override NodeState Evaluate()
+    protected override void OnStart() { }
+
+    protected override NodeState OnUpdate()
     {
-        Debug.Log(message);
-        _nodeState = NodeState.SUCCESS;
-        return _nodeState;
+        Debug.Log($"{message}");
+        return NodeState.SUCCESS;
     }
+
+    protected override void OnStop() { }
 }

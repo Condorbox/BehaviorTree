@@ -16,7 +16,9 @@ public class IsCoverAvailableNode : Node
         this.ai = ai;
     }
 
-    public override NodeState Evaluate()
+    protected override void OnStart() { }
+
+    protected override NodeState OnUpdate()
     {
         Transform bestSpot = FindBestCoverSpot();
         ai.SetBestCoverSpot(bestSpot);
@@ -82,4 +84,6 @@ public class IsCoverAvailableNode : Node
         }
         return false;
     }
+
+    protected override void OnStop() { }
 }

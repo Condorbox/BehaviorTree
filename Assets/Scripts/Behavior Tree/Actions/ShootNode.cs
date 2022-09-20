@@ -22,7 +22,9 @@ public class ShootNode : Node
         smoothDamp = 1f;
     }
 
-    public override NodeState Evaluate()
+    protected override void OnStart() { }
+
+    protected override NodeState OnUpdate()
     {
         agent.isStopped = true;
         ai.SetColor(Color.green);
@@ -30,7 +32,8 @@ public class ShootNode : Node
         Vector3 currentDirection = Vector3.SmoothDamp(ai.transform.forward, direction, ref currentVelocity, smoothDamp);
         Quaternion rotation = Quaternion.LookRotation(currentDirection, Vector3.up);
         ai.transform.rotation = rotation;
-        _nodeState = NodeState.RUNNING;
-        return _nodeState;
+        return NodeState.RUNNING;
     }
+
+    protected override void OnStop() { }
 }

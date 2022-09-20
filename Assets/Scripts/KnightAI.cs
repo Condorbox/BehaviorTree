@@ -32,11 +32,13 @@ public class KnightAI : Tree
         SpawnFallingRocks spawnFallingRocks = new SpawnFallingRocks(spawnRockCollider, rockPrefab, 3, 1.2f);
 
         Sequence sequenceJump = new Sequence(new List<Node> { jump, facePlayer });
-        Wait waitJump = new Wait(sequenceJump, 1f);
+        Wait waitJump = new Wait(sequenceJump, .5f);
 
         Sequence sequenceHammer = new Sequence(new List<Node> { facePlayer, shoot, spawnFallingRocks });
-        Wait waitHammer = new Wait(sequenceHammer, 1.5f);
+        Wait waitHammer = new Wait(sequenceHammer, 1f);
 
-        return new RandomComposite(new List<Node> { waitJump, waitHammer });
+        WaitAction waitAction = new WaitAction(1f);
+
+        return new RandomComposite(new List<Node> { waitAction, waitJump, waitHammer });
     }
 }
