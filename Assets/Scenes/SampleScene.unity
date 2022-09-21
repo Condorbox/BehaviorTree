@@ -607,6 +607,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c945c0470b69fba4f9bf9bf4310da6da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  drawGizmos: 1
   maxHealth: 30
   lowerHealthThreshold: 10
   healthRestoreRate: 0.25
@@ -2207,7 +2208,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18f646f3bdbbfcb40a3bbaf8c3cecb79, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  material: {fileID: 2100000, guid: ef4d5b036fac0704887725babf2abec9, type: 2}
+  drawGizmos: 0
 --- !u!1 &1442195599
 GameObject:
   m_ObjectHideFlags: 0

@@ -45,6 +45,16 @@ namespace BehaviorTree
 
         public virtual void OnDrawGizmos() { }
 
+        public void Abort()
+        {
+            Tree.Traverse(this, (node) =>
+            {
+                node.started = false;
+                node._nodeState = NodeState.RUNNING;
+                node.OnStop();
+            });
+        }
+
         public void SetData(string key, object value)
         {
             dataContext[key] = value;

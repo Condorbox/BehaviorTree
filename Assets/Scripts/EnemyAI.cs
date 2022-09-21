@@ -68,8 +68,8 @@ public class EnemyAI : Tree
         HealthNode healthNode = new HealthNode(this, lowerHealthThreshold);
         IsCoverNode isCoveredNode = new IsCoverNode(playerTransform, transform);
         ChaseNode chaseNode = new ChaseNode(playerTransform, agent, this);
-        RangeNode chasingRangeNode = new RangeNode(chasingRange, playerTransform, transform);
-        RangeNode shootingRangeNode = new RangeNode(shootRange, playerTransform, transform);
+        RangeNode chasingRangeNode = new RangeNode(chasingRange, playerTransform, transform, Color.yellow);
+        RangeNode shootingRangeNode = new RangeNode(shootRange, playerTransform, transform, Color.red);
         ShootNode shootNode = new ShootNode(agent, this, playerTransform);
 
         Sequence chaseSequence = new Sequence(new List<Node> { chasingRangeNode, chaseNode });

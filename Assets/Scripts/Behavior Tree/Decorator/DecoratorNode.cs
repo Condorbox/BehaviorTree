@@ -7,7 +7,7 @@ namespace BehaviorTree
     public abstract class DecoratorNode : Node
     {
         protected Node node;
-
+        public Node child { get { return node; } }
         public DecoratorNode(Node node) : base()
         {
             node.SetParent(this);

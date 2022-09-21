@@ -6,7 +6,7 @@ namespace BehaviorTree
     public abstract class CompositeNode : Node
     {
         protected List<Node> nodes = new List<Node>();
-
+        public List<Node> children { get { return nodes; } }
         public CompositeNode(List<Node> children)
         {
             foreach (Node child in children)
